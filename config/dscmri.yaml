@@ -1,0 +1,31 @@
+dataset: 'IAPR-TC'
+target: [110,207]
+#poison_data_last_name: '110_207_31474_with_cosine_eps=4_neg_weight=0.01'
+poison_data_last_name: '110_207_31474_with_cosine_eps=4_neg_weight=0.02'
+#poison_data_last_name: '110_207_0049_515476197_with_cosine_eps=4'
+#phase: 'test'
+phase: 'train'
+percentage: 0.01
+#checkpoint: '/root/badCM-main/checkpoints/dscmr_VGG16_IAPR-TC_BadCM_p=0.01_target=110/110_207_0049_515476197_with_cosine_eps=4_20260526_1116_epoch=24-step=007825-val_map=0.5781.ckpt'
+checkpoint: null
+config_name: 'dscmr.yaml'
+data_path: './data'
+module: victims.dscmr
+backbones: ['VGG16', 'TextCNN']
+#backbones: ['ResNet50', 'TextCNN']
+batch_size: 32
+#epochs: 50
+epochs: 25
+lr: 0.0001
+test_percentage: 1  # 控制毒化测试集的毒化样本比例
+text_embedding: 300
+betas: [0.5, 0.999]
+device: '0'
+valid_interval: 5
+attack: BadCM
+badcm: null
+modal: 'image'
+enable_tb: false
+use_faiss: true
+faiss_use_gpu: false
+faiss_candidate_factor: 1

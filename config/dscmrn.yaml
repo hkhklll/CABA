@@ -1,0 +1,39 @@
+dataset: 'NUS-WIDE'
+target: [3,14]
+#poison_data_last_name: 'clouds_sky_0049_515476197_with_cosine_eps=8'
+#poison_data_last_name: 'clouds_sky_0049_515476197_with_cosine_eps=4'
+#poison_data_last_name: 'clouds_sky_0049_515476197_with_cosine_eps=4_neg_weight=0.01'
+#poison_data_last_name: 'clouds_sky_0049_515476197_with_cosine_eps=8_neg_weight=0.01_default'
+#poison_data_last_name: 'building_person_0401_262567072_with_cosine_eps=8_default'
+#poison_data_last_name: 'clouds_sky_0049_515476197_with_cosine_eps=8_default'
+poison_data_last_name: 'benign'
+#phase: 'test'
+phase: 'train'
+percentage: 0
+#checkpoint: '/root/badCM-main/checkpoints/dscmr_VGG16_NUS-WIDE_BadCM_p=0.01_target=3/clouds_sky_0049_515476197_with_cosine_eps=4_neg_weight=0.01_20260601_0930_epoch=14-step=004935-val_map=0.7059.ckpt'
+#checkpoint: '/root/badCM-main/checkpoints/dscmr_VGG16_NUS-WIDE_BadCM_p=0.01_target=3/clouds_sky_0049_515476197_with_cosine_eps=8_default_20260617_1725_epoch=29-step=009870-val_map=0.7054.ckpt'
+#checkpoint: '/root/badCM-main/checkpoints/dscmr_VGG16_NUS-WIDE_BadCM_p=0.02_target=3/clouds_sky_0049_515476197_with_cosine_eps=4_20260601_0929_epoch=09-step=003290-val_map=0.7052.ckpt'
+checkpoint: null
+config_name: 'dscmr.yaml'
+data_path: './data'
+module: victims.dscmr
+#input_file: 'cm_105_non_person_train_imgs.txt'
+backbones: ['VGG16', 'TextCNN']
+#backbones: ['ResNet50', 'TextCNN']
+batch_size: 32
+epochs: 25
+lr: 0.0001
+test_percentage: 1  # 控制毒化测试集的毒化样本比例
+text_embedding: 300
+betas: [0.5, 0.999]
+device: '0'
+valid_interval: 5
+attack: BadCM
+badcm: null
+modal: 'image'
+enable_tb: false
+use_faiss: true
+faiss_use_gpu: false
+faiss_candidate_factor: 1
+save_name: 'defense'
+module_name: 'dscmr'
